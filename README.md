@@ -1,35 +1,24 @@
-# Cucumber-Java Skeleton
+# Cucumber-Java Tiketa
 
-This is the simplest possible build script setup for Cucumber using Java.
-There is nothing fancy like a webapp or browser testing. All this does is to show
-you how to install and run Cucumber!
+This is the test automation project with build script setup for Cucumber using Java.
 
-There is a single feature file with one scenario. The scenario has three steps,
-two of them pending. See if you can make them all pass!
+## Tools
+
+    Java 8 and above
+    Gradle
+
+## Plugins
+
+    Cucumber+ for IDE
 
 ## Get the code
 
 Git:
 
-    git clone https://github.com/cucumber/cucumber-java-skeleton.git
-    cd cucumber-java-skeleton
+    git clone https://github.com/audriusbertasius/cucumber-java-tiketa.git
+    cd cucumber-java-tiketa
 
-Subversion:
-
-    svn checkout https://github.com/cucumber/cucumber-java-skeleton/trunk cucumber-java-skeleton
-    cd cucumber-java-skeleton
-
-Or [download a zip](https://github.com/cucumber/cucumber-java-skeleton/archive/main.zip) file.
-
-## Use Maven
-
-Open a command window and run:
-
-    cd maven
-    ./mvnw test
-
-This runs Cucumber features using Cucumber's JUnit Platform Engine. The `Suite`
-annotation on the `RunCucumberTest` class tells JUnit to kick off Cucumber.
+Or [download a zip](https://github.com/audriusbertasius/cucumber-java-tiketa/archive/main.zip) file.
 
 ## Use Gradle
 
@@ -48,17 +37,24 @@ where the glue code lives, what plugins to use etc. When using JUnit, these
 configuration parameters are provided through the `@ConfigurationParameter`
 annotation on your test.
 
-For available parameters see: `io.cucumber.junit.platform.engine.Constants`
+### Run a subset of or Scenarios
 
-### Run a subset of Features or Scenarios
+You can tell Cucumber to only run scenarios with a particular tag:
 
-Specify a particular scenario by *line*
+    @CucumberOptions(tags = "@smoke and @regression")
+    public class RunCucumberTest {}
 
-    @SelectClasspathResource(value = "io/cucumber/skeleton/belly.feature", line = 3)
+Ignoring a subset of scenarios:
 
-In case you have multiple feature files or scenarios to run against repeat the
-annotation.
+    @CucumberOptions(tags = "not @smoke")
+    public class RunCucumberTest {}
 
-You can also specify what to run by *tag*:
+./gradlew test
 
-    @IncludeTags("zucchini")
+## Reports
+
+    View your Cucumber Report at provided link after test execution:                                            │
+    https://reports.cucumber.io/reports/... 
+
+    Local report:                                            │
+    ..\cucumber-java-tiketa\gradle\build\reports\tests\test\index.html

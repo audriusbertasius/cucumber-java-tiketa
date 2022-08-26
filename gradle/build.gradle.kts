@@ -9,6 +9,18 @@ dependencies {
     testImplementation("io.cucumber:cucumber-junit-platform-engine")
     testImplementation("org.junit.platform:junit-platform-suite")
     testImplementation("org.junit.jupiter:junit-jupiter")
+
+    testImplementation("io.rest-assured:rest-assured:5.1.1")
+    testImplementation("com.fasterxml.jackson.core:jackson-core:2.13.3")
+    testImplementation("com.fasterxml.jackson.core:jackson-annotations:2.13.3")
+    testImplementation("com.fasterxml.jackson.core:jackson-databind:2.13.3")
+
+    testImplementation("io.github.bonigarcia:selenium-jupiter:4.3.0")
+    testImplementation("org.seleniumhq.selenium:selenium-java:4.4.0")
+    testImplementation("org.junit.platform:junit-platform-console:1.9.0")
+
+    testImplementation("org.assertj:assertj-core:3.23.1")
+    testImplementation("org.junit.jupiter:junit-jupiter:5.8.2")
 }
 
 repositories {
@@ -18,7 +30,5 @@ repositories {
 
 tasks.withType<Test> {
     useJUnitPlatform()
-    // Work around. Gradle does not include enough information to disambiguate
-    // between different examples and scenarios.
     systemProperty("cucumber.junit-platform.naming-strategy", "long")
 }
