@@ -12,3 +12,7 @@ Feature: Tiketa
     Examples:
       | partCaption | eventPlace                   | dateFrom | dateTo       | fullCaption                 | options |
       | "Corteo"    | "Avia Solutions Group arena" | ""       | "2022-12-31" | "CIRQUE DU SOLEIL - CORTEO" | 5       |
+
+    #There is no such event Corteo any more as of current date 2022-08-31
+    #Solution to test events that exist for short time would dynamic test. Need to create connection to DB and get upcoming events list
+    #Then get event details from db like date and other.., pass all search criteria to UI in the search engine and verify event was found.

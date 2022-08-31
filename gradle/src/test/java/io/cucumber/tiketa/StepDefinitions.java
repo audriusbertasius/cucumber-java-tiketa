@@ -71,7 +71,7 @@ public class StepDefinitions
         WebElement captionSearch = driver.findElement(By.name("sf_TextFilter"));
         captionSearch.sendKeys(caption);
 
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(2));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         wait.until(ExpectedConditions.visibilityOfElementLocated(suggestions));
 
         List<WebElement> suggestionsList = driver.findElements(suggestion);
