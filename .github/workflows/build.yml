@@ -7,10 +7,21 @@ on:
       - main
 
 jobs:
-  build:
-    name: 'Build'
+  gradle-build:
     runs-on: ubuntu-latest
     steps:
+      - name: Set variables
+        env:
+          TARGET_ENV: testing
+          TEST_SCOPE: test
+        run: |
+          echo "TARGET_ENV=${{ github.event.inputs.target_env || env.TARGET_ENV }}" >> $GITHUB_ENV
+          echo "TEST_SCOPE=${{ github.event.inputs.test_scope || env.TEST_SCOPE }}" >> $GITHUB_ENV
+      - name: Echo Inputs
+        run: |
+          echo "TARGET_ENV: ${{ env.TARGET_ENV }}"
+          echo "TEST_SCOPE: ${{ env.TEST_SCOPE }}"
+        shell: bash
       - uses: actions/checkout@v3
       - uses: actions/cache@v3
         with:
@@ -20,26 +31,36 @@ jobs:
           key: ${{ runner.os }}-gradle-node-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
           restore-keys: |
             ${{ runner.os }}-gradle-node-
-      name: Set up JDK 17
-          uses: actions/setup-java@v3
-          with:
-            java-version: '17'
-            distribution: 'adopt'
-            server-id: github
-            settings-path: ${{ github.workspace }}
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'adopt'
+          server-id: github
+          settings-path: ${{ github.workspace }}
       - uses: browser-actions/setup-chrome@latest
       - run: chrome --version
-      - name: test gradle
+      - name: Build with Gradle
         run: |
           cd gradle
           ./gradlew test || true
 
       - name: Zip report files
-      if: always()
-      run: zip -r reports.zip reports
+        if: always()
+        run: zip -r reports.zip reports
 
       - uses: actions/upload-artifact@v3
         if: always()
         with:
           name: reports.zip
           path: ${{ github.workspace }}/reports.zip
+
+      - name: Zip report files
+        if: always()
+        run: zip -r failing-tests.zip output
+
+      - uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: failing-tests.zip
+          path: ${{ github.workspace }}/failing-tests.zip
