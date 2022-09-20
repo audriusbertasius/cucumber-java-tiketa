@@ -10,6 +10,7 @@ This is the test automation project with build script setup for Cucumber using J
 ## Plugins
 
     Cucumber+ for IDE
+    Gherkin
 
 ## Get the code
 
