@@ -35,7 +35,7 @@ public class StepDefinitions
     public void setUp()
     {
         System.setProperty("webdriver.chrome.driver",
-                           Paths.get("src/test/resources/chromedriver_win32/chromedriver.exe").toString());
+                           Paths.get("src/test/resources/chromedriver_mac64_m1/chromedriver").toString());
         if (driver == null)
         {
             ChromeOptions options = new ChromeOptions();
